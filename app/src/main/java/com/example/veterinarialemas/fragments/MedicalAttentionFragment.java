@@ -187,17 +187,18 @@ public class MedicalAttentionFragment extends Fragment implements View.OnClickLi
             ImageUploader.uploadImage(bitmap, new ImageUploader.UploadCallBack() {
                 @Override
                 public void onSuccess(String imageUrl) {
-                    saveDB(nameHosts,
+                    requireActivity().runOnUiThread(() -> saveDB(nameHosts,
                             namePets,
                             typePets,
                             razaPets,
                             agePets,
-                            imageUrl);
+                            imageUrl));
                 }
 
                 @Override
                 public void onError(String error) {
-                    Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
+                    requireActivity().runOnUiThread(() ->
+                            Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show());
                 }
             });
         }
